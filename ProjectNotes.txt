@@ -1,0 +1,118 @@
+1. To create a group. Group is created outside of user. User adds group to its gHist. The group's moderator (from within the user method )is set to 'this' i.e. the user which calls the create group
+2. a moderator can call its deleteGroup method which calls the group's absolve group method. The group's absolveGroup method will call the leaveGroup Method for all of its user and then finally delete the group.
+3. AddGroup Method in User basically adds the group to its gHist. 
+---------------------------------------------------------------------
+To Add a new content
+1.Create the content. media post will have source -> will save media in database
+blog post and message will be just text 
+2. call user's method writeContent
+write content will add the content to the group. also, should check which type of content it is. If message , then do nothing further. If other type, add to users uploadHistory
+
+
+
+---------------------------------------------------------------------
+How we want the database to run!
+
+Admin:
+	Adds users to the user databases and creates groups which are added to the blog group database. From here, admins should also be able to add members to the groups they have created.
+
+Users:
+	Once added to a blog post group, or message group, they should be able to see all of the content stored in that group. The user should also be able to see all other groups content once logged in; however, this is limited to blog groups only and they cannot post to groups they are not a part of.
+
+Group:
+	To add to a group you have to traverse into the group and then select a button saying "Add Members". when you want to view someone else‘s profile....
+request ->
+   |	  their id -> 
+   |		     their upload history -> 
+   |					    upload ids -> 
+   |						         master database ____
+   |									     |
+   |	 								     |
+   |_________________________________________________________________________V
+
+
+When a new message is created, it gets added to the main databases. Then when the addContent method for the uploadHistory and GroupHistory is called, the ids for the blog posts are added to the user database  uHist table and blog/message Group Database, gHist table (Blog Group Database and message Group database are two separate databases) 
+
+
+
+Create a createMessageGroup method in user and the admin will have another method for createBlogGroup
+
+
+
+
+FOR CHECKING PAST A CURRENT ID NUMBER IN SQLITE
+select * from test where id > NUMBER;
+
+
+Remember to talk about how we intend to do comments for the blogs
+
+
+To Craig: We should finish the functionality for creating the content. The content should have an id, as well as a time stamp. It should also have an author
+
+
+Every type of Upload will be handled by the Group, not the User, and stored in it's respective database. 
+
+When you create an Upload of some sort a TimeStamp is automatically generated and assigned to the Upload itself. When you add the Upload to the database (through the group) the content is copied to a directory and a timestamp is furthermore associated to that Upload.
+
+Objects may actually be a bit unneccessary as the data can be, and in most (if not all cases), directly stored into the databases
+
+On startup, a User object should be created and a list of their necessary ID's will be pulled and can be directly used by the User object. Technically speaking, no other objects need to be created as their information will all be stored in databases.
+
+
+Can make things static because they technically don't need to be "created"
+
+----------------------------------------------------------------
+To insert into dtabase from QT, use :
+QSqlQuery query;
+query.prepare("INSERT INTO customer_details(rationcard_num, aadharcard_num, name) values(:rationcard_num,:aadharcard_num,name)");
+query.bindValue(":rationcard_num",your_value);
+query.bindValue(":aadharcard_num",your_value);
+query.bindValue(":name",your_value);
+query.exec();
+ ------------------------------------------------
+
+Need to talk about how we want to add info to the database. i.e. the flow:
+e.g. Create a group object which takes in a list of ids of users and then pass that object to the user who creates it.
+or just pass along the information instead of the object
+Same question for writing messages/comments/blogs/pictures
+
+
+-----------------------------------------------------
+Do we want to make the contentID in the GroupTable unique or the contentID in each individual type of upload unique.
+Also, where do comments come into all of this. Will they be based off of separate contnetIDs. Also, we need to talk about race conditions.
+
+-->Waseh: left off at working on createMessageGroup() on user.
+
+----> Comments will have a unique id as well
+
+--> when passing in any type of content, pass in (groupID, blogContentID(NUl except for comments), upload type "String", userID, content, filePath if not null)
+		(int groupID, std::string uploadType, int userID, std::string content, int blogContentID=-1, std::string filePath="")
+
+
+For main menu of text UI
+
+Messaging (write/read messages)
+create Tweet (create posts)
+view tweet
+Groups (Leave group, add members, delete groups you own)
+Configuration (notifications)
+Website
+Exit
+
+
+When on the Blog:
+	Individual Post:
+	Enter ->
+		Individual Comment
+		Bottom has option to write own content
+		ESC goes back to post
+-------------------------------------------------------
+14:48 4/16 Waseh
+We need to make sure everytime we check to see if the user is still a a part of the group when he goes to read the blog post, message posts etc" as in reload continuously.
+
+
+Add functionality to check if person is moderator, and isAuthor
+
+Also, when a person writes a post, do an update on the database to find out if the post or group still exists when they click submit to make sure it doesnt get written  so like
+if(groupIsStillThere(groupID){writeBlogPost(....)} and same for comment and message but for comment also make sure the blog is still there.
+

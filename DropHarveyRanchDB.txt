@@ -1,0 +1,10 @@
+DROP table IF EXISTS UserGroup ;
+DROP table IF EXISTS GroupTable ;
+DROP table IF EXISTS CommentsBlogs ;
+DROP table IF EXISTS UserTable ;
+DROP table IF EXISTS GroupContentHistory ;
+DROP table IF EXISTS UserUploadHistory ;
+DROP table IF EXISTS CommentsTable ;
+DROP table IF EXISTS BlogPostTable ;
+DROP table IF EXISTS MediaPostTable ;
+DROP table IF EXISTS MessageTable ;

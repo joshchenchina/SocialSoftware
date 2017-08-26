@@ -1,0 +1,12 @@
+CREATE table UserGroup (UserID integer NOT NULL, GroupID integer NOT NULL);
+CREATE table GroupTable (GroupID integer UNIQUE NOT NULL PRIMARY KEY, GroupName text NOT NULL, ModeratorID integer NOT NULL, GroupType text NOT NULL);
+CREATE table CommentsBlogs (GroupID integer NOT NULL, ContentID_blog integer NOT NULL, ContentID_comment integer NOT NULL PRIMARY KEY, TimeStamp long NOT NULL);
+CREATE table UserTable (UserID integer UNIQUE NOT NULL PRIMARY KEY, Name text, Username text NOT NULL UNIQUE, Password text NOT NULL);
+CREATE table GroupContentHistory (GroupID integer NOT NULL , ContentID integer UNIQUE NOT NULL PRIMARY KEY , UploadType text NOT NULL, TimeStamp long NOT NULL, FOREIGN KEY (GroupID) REFERENCES GroupTable(GroupID));
+CREATE table UserUploadHistory (UserID integer NOT NULL, ContentID integer NOT NULL, FOREIGN KEY (UserID) REFERENCES UserTable(UserID));
+CREATE table CommentsTable (ContentID integer UNIQUE NOT NULL  , UserID integer NOT NULL, Content text NOT NULL, Author text NOT NULL, FOREIGN KEY (ContentID) REFERENCES GroupContentHistory(ContentID));
+CREATE table BlogPostTable (ContentID integer UNIQUE NOT NULL, UserID integer NOT NULL, Content text NOT NULL, Author text NOT NULL, FOREIGN KEY (ContentID) REFERENCES GroupContentHistory(ContentID));
+CREATE table MediaPostTable (ContentID integer UNIQUE NOT NULL,UserID integer NOT NULL, Content text NOT NULL, Author text NOT NULL,  FilePath text NOT NULL, FOREIGN KEY (ContentID) REFERENCES GroupContentHistory(ContentID));
+CREATE table MessageTable (ContentID integer UNIQUE NOT NULL, MessageContent text NOT NULL, Author text NOT NULL, FOREIGN KEY (ContentID) REFERENCES GroupContentHistory(ContentID));
+
+INSERT into UserTable VALUES(0, "admin, admin" , "admin" , "adminPass");

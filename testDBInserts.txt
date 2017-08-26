@@ -1,0 +1,57 @@
+INSERT into UserGroup VALUES(0,0);
+INSERT into UserGroup VALUES(0,1);
+INSERT into UserGroup VALUES(0,2);
+INSERT into UserGroup VALUES(1,3);
+INSERT into UserGroup VALUES(1,1);
+INSERT into UserGroup VALUES(0,3);
+
+INSERT into UserTable VALUES(1 , "Pfaffman, Jeff", "pfaffmaj", "newPassword");
+
+INSERT into UserTable(Name, Username, Password) VALUES ("Ahmad, Waseh", "ahmadw" , "password");
+INSERT into UserTable(Name, Username, Password) VALUES ("Lombardo, Craig", "lombardoc" , "password");
+INSERT into UserTable(Name, Username, Password) VALUES ("Chen, Yizhong ", "chenyi" , "password");
+
+INSERT into UserGroup VALUES(2,3);
+INSERT into UserGroup VALUES(3,3);
+INSERT into UserGroup VALUES(4,3);
+
+INSERT into GroupContentHistory (GroupId, UploadType, TimeStamp) VALUES(3, "Blog" , 20160415225214);
+INSERT into GroupContentHistory (GroupId, UploadType, TimeStamp) VALUES(3, "Blog" , 20160415225341);
+INSERT into GroupContentHistory (GroupId, UploadType, TimeStamp) VALUES(3, "Blog" , 20160415225456);
+
+
+INSERT into BlogPostTable (ContentID, Content, UserID, Author) VALUES(1, "Hello from waseh", 2 , "Ahmad, Waseh");
+INSERT into BlogPostTable (ContentID, Content, UserID, Author) VALUES(2, "Hello from craig", 3 , "Lombardo, Craig");
+INSERT into BlogPostTable (ContentID, Content, UserID, Author) VALUES(3, "Hello from josh", 4 , "Chen, Yizhong");
+
+INSERT into UserUploadHistory (UserID, ContentID) VALUES(2,1);
+INSERT into UserUploadHistory (UserID, ContentID) VALUES(3,2);
+INSERT into UserUploadHistory (UserID, ContentID) VALUES(4,3);
+
+INSERT into CommentsBlogs (GroupID, ContentID_blog ,  TimeStamp ) VALUES (3, 2, 20160415225612); 
+INSERT into CommentsBlogs (GroupID, ContentID_blog ,  TimeStamp ) VALUES (3, 2, 20160415225713); 
+INSERT into CommentsBlogs (GroupID, ContentID_blog ,  TimeStamp ) VALUES (3, 2, 20160415225814); 
+
+INSERT into CommentsTable (ContentID , UserID , Content, Author ) VALUES (1, 2, "Comment1", "Ahmad, Waseh");
+INSERT into CommentsTable (ContentID , UserID , Content, Author ) VALUES (2, 3, "Comment2", "Lombardo, Craig");
+INSERT into CommentsTable (ContentID , UserID , Content, Author ) VALUES (3, 4, "Comment3", "Chen, Yizhong"); 
+
+
+
+INSERT into GroupTable VALUES(0,"MainGroup0",0, "Blog");
+INSERT into GroupTable VALUES(1,"MainGroup1",1, "Message");
+INSERT into GroupTable VALUES(2,"MainGroup2",0, "Blog");
+INSERT into GroupTable VALUES(3,"MainGroup3",0, "Blog");
+
+
+INSERT into GroupContentHistory(GroupID, UploadType, TimeStamp) VALUES(1, "Message", 20160415225612);
+INSERT into GroupContentHistory(GroupID, UploadType, TimeStamp) VALUES(1, "Message", 20160415225613);
+INSERT into GroupContentHistory(GroupID, UploadType, TimeStamp) VALUES(1, "Message", 20160415225614);
+INSERT into GroupContentHistory(GroupID, UploadType, TimeStamp) VALUES(1, "Message", 20160415225615);
+
+INSERT into MessageTable(ContentID, MessageContent, Author) VALUES(4, "Testing message 1", "pfaffmaj");
+INSERT into MessageTable(ContentID, MessageContent, Author) VALUES(5, "Testing message 2", "admin");
+INSERT into MessageTable(ContentID, MessageContent, Author) VALUES(6, "Testing message 3", "pfaffmaj");
+INSERT into MessageTable(ContentID, MessageContent, Author) VALUES(7, "Testing message 4", "admin");
+
+
